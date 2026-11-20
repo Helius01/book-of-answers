@@ -36,7 +36,7 @@ For a moment he looks very old.
 
 You hold up the mirror. In it, the Abbot is not calm. He is crying. He is afraid.
 
-He is not evil. He is a frightened old man.
+He is an old man, and he is afraid.
 
 [[Tell him: "Leonardo misses you."|A7_forgive]]
 [[Free your friend|A7_rescue]]
@@ -127,6 +127,7 @@ At his window, Leonardo smiles.
 
 ''The Bells of Truth.'' THE END.
 
+<<if Story.has("RunStats")>><<include "RunStats">><</if>>
 <<link "Play again">><<run Engine.restart()>><</link>>
 
 :: END_gift [end dark]
@@ -140,6 +141,7 @@ They do not say sorry. They do not need to.
 
 ''The Careful Gift.'' THE END.
 
+<<if Story.has("RunStats")>><<include "RunStats">><</if>>
 <<link "Play again">><<run Engine.restart()>><</link>>
 
 :: END_abbot [end dark]
@@ -153,6 +155,7 @@ Years later, you wear a grey robe. Your mask has no mouth.
 
 ''The New Abbot.'' THE END.
 
+<<if Story.has("RunStats")>><<include "RunStats">><</if>>
 <<link "Play again">><<run Engine.restart()>><</link>>
 
 :: END_ashes [end dark]
@@ -166,6 +169,7 @@ One page flies out of the window, into the morning wind.
 
 ''Ashes.'' THE END.
 
+<<if Story.has("RunStats")>><<include "RunStats">><</if>>
 <<link "Play again">><<run Engine.restart()>><</link>>
 
 :: END_secret [end dark]
@@ -179,4 +183,5 @@ It was written three hundred years before you were born.
 
 ''The Secret Ending.'' THE END… or is it?
 
+<<if Story.has("RunStats")>><<include "RunStats">><</if>>
 <<link "Play again">><<run Engine.restart()>><</link>>

@@ -1,0 +1,3 @@
+:: RunStats [ui]
+/* Playtest build only. Never compiled into the release: see Makefile. */
+<div class="note">Playtest — wax $wax · heart $heart · trust E$trust.elena T$trust.tomasso R$trust.rook · mirrors $mirrorSolved · clues $clues.length · timers <<= $flags.timers ? "on" : "off">></div>
