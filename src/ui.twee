@@ -13,9 +13,37 @@
 
 :: StoryMenu
 <<link "Journal">><<run Dialog.create("Journal"); Dialog.wikiPassage("Journal"); Dialog.open()>><</link>>
+<<link `"Timers: " + ($flags.timers ? "on" : "off")`>><<set $flags.timers to not $flags.timers>><<run UI.update()>><</link>>
 
 :: Journal [ui]
+''Clues''
+<<if $clues.length is 0>>Nothing written down yet.<<else>><<for _id range $clues>><div class="clue"><<include `"CL_" + _id`>></div><</for>><</if>>
+
+''The Book Speaks''
 <<if $answers.length is 0>>The book has not spoken yet.<<else>><<for _id range $answers>><div class="speaks"><<include `"BS_" + _id`>></div><</for>><</if>>
+
+:: CL_letter [clue]
+''Leonardo's letter'', read backwards: //Come to my workshop at midnight. Tell no one.//
+
+:: CL_tunnel [clue]
+''The tunnels'', copied from the chalk drawing in the graveyard.
+<pre class="map">
+   graves ═══ tunnel ═══ church
+                  ║
+                crypt ═══ old library
+</pre>
+
+:: CL_angels [clue]
+''The angels' lock'': one candle, four doves, five stars, two keys. The year Leonardo was born: 1452.
+
+:: CL_churchmap [clue]
+''Leonardo's map of the church.'' The top of the tower is missing. Under it, in mirror writing: //TIME REVEALS.//
+
+:: CL_tower [clue]
+''The book is in the Bell Tower'', inside the biggest bell. This was the missing piece of the map.
+
+:: CL_abbot [clue]
+''The Abbot's story:'' he and Leonardo found the book together, forty years ago. A man read the page about death and never spoke again.
 
 :: BS_dark [answer]
 ''Why do we fear the dark?''

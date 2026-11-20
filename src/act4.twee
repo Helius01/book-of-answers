@@ -38,7 +38,9 @@ The mask turns. Slowly. It looks into the gap.
 
 It looks right at you.
 
-Thump. Thump. Thump. Your heart is so loud.
+<div class="heartbeat">Thump. Thump. Thump.</div>
+
+Your heart is so loud.
 
 Type //wait//.
 
@@ -122,6 +124,7 @@ On the far side, there is a drawing on the wall. Leonardo's hand. You know it.
 
 It is a map of the church. One piece is missing: the top of the tower.
 
+<<clue "churchmap">>
 Under it, in mirror writing:
 
 <div class="mirror">SLAEVER EMIT</div>

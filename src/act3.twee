@@ -78,6 +78,7 @@ The stone turns with a deep sound. A tiny room opens.
 
 Inside is a bronze key, shaped like a bird. You put it in your satchel.
 
+<<clue "angels">>
 Your candle shows words on the wall:
 
 <<speak "dreams">>

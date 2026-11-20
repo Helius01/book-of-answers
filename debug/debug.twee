@@ -1,7 +1,7 @@
 :: DebugPanel [debug nobr]
 /* Dev builds only (make dev). SugarCube's own debug bar shows variables and can jump to passages. */
 <div class="debug">
-<b>Debug</b> wax $wax · heart $heart · trust E$trust.elena T$trust.tomasso R$trust.rook · mirrors $mirrorSolved
+<b>Debug</b> wax $wax · heart $heart · trust E$trust.elena T$trust.tomasso R$trust.rook · mirrors $mirrorSolved · clues $clues.length
 <div>
 <<link "A1">><<goto "A1_start">><</link>>
 <<link "A2">><<set $flags.candle_lit to true>><<goto "A2_start">><</link>>

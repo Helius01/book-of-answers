@@ -82,6 +82,7 @@ The missing piece of Leonardo's map.
 
 The book is in the Bell Tower. Inside the biggest bell.
 
+<<clue "tower">>
 [[Go to the tower|A5_end]]
 
 :: A5_end [autosave]

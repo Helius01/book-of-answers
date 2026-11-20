@@ -32,6 +32,7 @@ Start at the right side. Read each letter to the left.
 :: A1_letter_ok
 //Come to my workshop at midnight. Tell no one.//
 
+<<clue "letter">>
 You put the paper in your shirt.
 
 Then you see him. A man in a red hat, under a dark arch.
@@ -46,8 +47,21 @@ The night market is loud and full. Fish, onions, wet dogs.
 
 You look back. The red hat is still there. Ten steps behind you. Now eight.
 
+<<hurry "A1_slow">>
 [[Hide under the fish stall|A1_hide]]
 [[Run through the crowd|A1_run]]
+
+:: A1_slow
+A hand closes on your collar. Your feet leave the ground.
+
+You turn. A red hat. Under it, a face you cannot see.
+
+Then a cart of onions hits you both. You fall, roll, and run.
+
+But he has seen your face.
+
+<<heart -1>>
+[[Run for the workshop|A1_rook]]
 
 :: A1_hide
 <<spend 1>>

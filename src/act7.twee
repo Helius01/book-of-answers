@@ -14,6 +14,7 @@ He looks out at Florence.
 
 "Leonardo never spoke to me again."
 
+<<clue "abbot">>
 [[Ask him: "Why not burn it, then?"|A7_why]]
 <<if $satchel.includes("mirror")>>[[Look at him in Leonardo's mirror|A7_mirror]]<</if>>
 [[Enough talk. Free your friend.|A7_rescue]]
@@ -55,6 +56,8 @@ The old man almost smiles.
 :: A7_rescue
 <<spend 2>>
 $captive looks at you. The rope is tight. Below, keys on the stairs.
+
+<div class="heartbeat">Thump. Thump. Thump.</div>
 
 How do you free $captive?
 

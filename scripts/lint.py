@@ -14,7 +14,7 @@ SPECIAL = {
     "PassageDone", "PassageHeader", "PassageFooter",
 }
 # Passages with these tags may have no outgoing link and are not word-count checked.
-NO_EXIT_TAGS = {"end", "widget", "script", "stylesheet", "answer", "debug", "ui"}
+NO_EXIT_TAGS = {"end", "widget", "script", "stylesheet", "answer", "debug", "ui", "clue"}
 CODE_TAGS = {"widget", "script", "stylesheet"}
 
 HEADER = re.compile(r"^::\s*(.*?)\s*(?:\[(.*?)\])?\s*(?:\{.*\})?\s*$")
@@ -23,6 +23,8 @@ MACRO_LINK = re.compile(r"<<(?:link|button)\s+([\"'])(?:.*?)\1\s+([\"'])(.*?)\2"
 MACRO_GOTO = re.compile(r"<<(?:goto|include)\s+([\"'])(.*?)\1")
 # <<check guess "answer" "okPassage" "failPassage">> and <<mirror ...>> (same args)
 MACRO_CHECK = re.compile(r"<<(?:check|mirror)\s+(.*?)>>")
+# <<hurry "tooSlowPassage">>
+MACRO_HURRY = re.compile(r"<<hurry\s+([\"'])(.*?)\1")
 DYNAMIC_LINK = re.compile(r"<<(?:link|button|goto)\s[^>]*`")
 COMMENT = re.compile(r"/\*.*?\*/", re.S)
 QUOTED = re.compile(r"([\"'])(.*?)\1")
@@ -63,6 +65,7 @@ def targets(body):
     out = [wiki_target(m.group(1)).strip() for m in WIKI_LINK.finditer(body)]
     out += [m.group(3) for m in MACRO_LINK.finditer(body)]
     out += [m.group(2) for m in MACRO_GOTO.finditer(body)]
+    out += [m.group(2) for m in MACRO_HURRY.finditer(body)]
     for m in MACRO_CHECK.finditer(body):
         out += [q.group(2) for q in QUOTED.finditer(m.group(1))][1:]
     dynamic = [t for t in out if "$" in t or "_" == t[:1] or "`" in t]

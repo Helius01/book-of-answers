@@ -20,6 +20,8 @@ The Book of Answers
 <<set $act to 1>>
 <<set $captive to "">>
 <<set $flags to {}>>
+<<set $clues to []>>
+<<set $flags.timers to true>>
 
 :: StoryScript [script]
 /* No undo: players must not take back wax, Heart or Trust. Also keeps saves small. */
@@ -102,6 +104,19 @@ Config.navigation.override = dest => {
 <<widget "speak">>
 	<<run $answers.pushUnique(_args[0])>>
 	<div class="speaks"><<include `"BS_" + _args[0]`>></div>
+<</widget>>
+
+/* <<clue "id">>: adds CL_id to the journal. Nothing is shown on screen. */
+<<widget "clue">>
+	<<run $clues.pushUnique(_args[0])>>
+<</widget>>
+
+/* <<hurry "tooSlowPassage">>: ten seconds to click a link. The setting is in the menu. */
+<<widget "hurry">>
+	<<if $flags.timers>>
+	<div class="timer">Ten seconds. Choose.<div></div></div>
+	<<timed 10s>><<goto `_args[0]`>><</timed>>
+	<</if>>
 <</widget>>
 
 :: darkness [dark]

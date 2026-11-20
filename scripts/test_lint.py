@@ -19,6 +19,9 @@ You stand still. $gold coins.
 :: Puzzle
 <<textbox "_g" "">><<link "Try">><<check _g "a" "Start" "Missing">><</link>>
 
+:: Chase
+<<hurry "Gone">>
+
 :: Start
 Duplicate.
 """
@@ -38,6 +41,7 @@ errors, warnings = lint({"bad.twee": BAD})
 text = "\n".join(errors)
 assert "broken link to 'Nowhere'" in text, errors
 assert "broken link to 'Missing'" in text, errors
+assert "broken link to 'Gone'" in text, errors
 assert "'Stuck': dead end" in text, errors
 assert "$gold is never set" in text, errors
 assert "duplicate passage 'Start'" in text, errors
