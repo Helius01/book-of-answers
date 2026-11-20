@@ -1,0 +1,22 @@
+:: StoryCaption [nobr]
+<<if $flags.candle_lit>>
+<div @class="'candle ' + ($wax lte 10 ? 'low' : $wax lte 25 ? 'short' : '')">
+	<div class="wax" @style="'width:' + $wax + '%'"></div>
+</div>
+<div class="candle-text"><<if $wax lte 10>>The flame is almost gone.<<elseif $wax lte 25>>Your candle is short now. The flame shakes.<<elseif $wax lte 50>>Half your candle is gone.<<else>>Your candle burns bright.<</if>></div>
+<</if>>
+<div class="satchel">
+	<b>Satchel</b> ($satchel.length/6)
+	<<if $satchel.length is 0>><div>Empty.</div><<else>><<for _item range $satchel>><div><<= _item.replace(/_/g, " ")>></div><</for>><</if>>
+</div>
+<<if Story.has("DebugPanel")>><<include "DebugPanel">><</if>>
+
+:: StoryMenu
+<<link "Journal">><<run Dialog.create("Journal"); Dialog.wikiPassage("Journal"); Dialog.open()>><</link>>
+
+:: Journal [ui]
+<<if $answers.length is 0>>The book has not spoken yet.<<else>><<for _id range $answers>><div class="speaks"><<include `"BS_" + _id`>></div><</for>><</if>>
+
+:: BS_dark [answer]
+''Why do we fear the dark?''
+//Not because of what is in it. Because of what is not: our eyes, our maps, our names for things. The dark is only the place where we stop knowing. Carry a small light, and it becomes a room.//

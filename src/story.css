@@ -1,0 +1,53 @@
+/* Readable first. Parchment and candle-flicker come in Phase 3. */
+body {
+	font-size: 1.25em;
+}
+#passages {
+	line-height: 1.6;
+	max-width: 38em;
+}
+blockquote {
+	font-style: italic;
+	border-left: 3px solid #b8860b;
+	margin-left: 0;
+	padding-left: 1em;
+}
+.mirror {
+	font-family: monospace;
+	letter-spacing: 0.15em;
+	font-size: 1.2em;
+}
+.note {
+	color: #e0a040;
+}
+.speaks {
+	border: 1px solid #b8860b;
+	padding: 0.5em 1em;
+	margin: 1em 0;
+}
+
+/* Candle bar in the side bar */
+.candle {
+	height: 0.8em;
+	background: #333;
+	border-radius: 0.4em;
+	overflow: hidden;
+}
+.candle .wax {
+	height: 100%;
+	background: #f2c14e;
+	transition: width 0.6s;
+}
+.candle.short .wax {
+	background: #e08a2e;
+}
+.candle.low .wax {
+	background: #c0392b;
+}
+.candle-text {
+	font-size: 0.85em;
+	margin: 0.3em 0 1em;
+}
+.satchel div {
+	padding-left: 0.5em;
+}

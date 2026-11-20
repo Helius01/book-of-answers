@@ -1,0 +1,118 @@
+:: StoryTitle
+The Book of Answers
+
+:: StoryData
+{
+  "ifid": "D1383503-7195-4F72-99FE-BF6DC323D226",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "A1_start"
+}
+
+:: StoryInit
+/* The whole game state. Change these only through the widgets below. */
+<<set $wax to 100>>
+<<set $heart to 5>>
+<<set $trust to { elena: 5, tomasso: 5, rook: 5 }>>
+<<set $satchel to []>>
+<<set $mirrorSolved to 0>>
+<<set $answers to []>>
+<<set $act to 1>>
+<<set $captive to "">>
+<<set $flags to {}>>
+
+:: StoryScript [script]
+/* No undo: players must not take back wax, Heart or Trust. Also keeps saves small. */
+Config.history.maxStates = 1;
+Config.saves.maxAutoSaves = 1;
+Config.saves.version = 1;
+
+/* "A Clock " matches "clock". Answers may list alternatives: "clock|aclock". */
+setup.norm = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, "");
+setup.matches = (guess, answers) => answers.split("|").map(setup.norm).includes(setup.norm(guess));
+
+/* Autosave when a passage tagged [autosave] is shown (each A#_end). */
+$(document).on(":passagedisplay", ev => {
+	if (ev.passage.tags.includes("autosave")) {
+		Save.browser.auto.save();
+	}
+});
+
+/* Candle out: every move goes to the darkness event, except passages tagged [dark].
+   TODO Phase 3: in Act 7 send the player to END_ashes instead. */
+Config.navigation.override = dest => {
+	const v = State.variables;
+	if (v.wax > 0 || !Story.has(dest) || Story.get(dest).tags.includes("dark")) {
+		return;
+	}
+	return "darkness";
+};
+
+:: Widgets [widget nobr]
+/* <<spend n>>: burn wax. Does nothing until the candle is lit in Act 2. */
+<<widget "spend">>
+	<<if $flags.candle_lit>><<set $wax to Math.clamp($wax - _args[0], 0, 100)>><</if>>
+<</widget>>
+
+/* <<heart n>>: n may be negative. */
+<<widget "heart">>
+	<<set $heart to Math.clamp($heart + _args[0], 0, 10)>>
+<</widget>>
+
+/* <<trust "elena" n>> */
+<<widget "trust">>
+	<<set $trust[_args[0]] to Math.clamp($trust[_args[0]] + _args[1], 0, 10)>>
+<</widget>>
+
+/* <<give "item">>: the satchel holds 6 items. */
+<<widget "give">>
+	<<if $satchel.includes(_args[0])>>
+	<<elseif $satchel.length lt 6>>
+		<<run $satchel.push(_args[0])>>
+	<<else>>
+		@@.note;Your satchel is full.@@
+	<</if>>
+<</widget>>
+
+<<widget "take">>
+	<<run $satchel.deleteAll(_args[0])>>
+<</widget>>
+
+/* <<check guess "answer|other" "okPassage" "failPassage">>
+   Use inside a <<link>>. The fail passage spends the wax. */
+<<widget "check">>
+	<<if setup.matches(_args[0], _args[1])>>
+		<<goto _args[2]>>
+	<<else>>
+		<<goto _args[3]>>
+	<</if>>
+<</widget>>
+
+/* <<mirror guess "answer" "okPassage" "failPassage">>: like check, and counts the
+   puzzle once toward the secret ending. */
+<<widget "mirror">>
+	<<if setup.matches(_args[0], _args[1]) and not $flags["mirror_" + _args[1]]>>
+		<<set $flags["mirror_" + _args[1]] to true>>
+		<<set $mirrorSolved++>>
+	<</if>>
+	<<check `_args[0]` `_args[1]` `_args[2]` `_args[3]`>>
+<</widget>>
+
+/* <<speak "id">>: the book answers a big question. Shows BS_id and adds it to the journal. */
+<<widget "speak">>
+	<<run $answers.pushUnique(_args[0])>>
+	<div class="speaks"><<include `"BS_" + _args[0]`>></div>
+<</widget>>
+
+:: darkness [dark]
+/* Not fatal before Act 7. Wax refill is a guess: tune in playtests. */
+<<set $wax to 30>>
+The flame dies. Total dark.
+
+You hear keys. Jingle, jingle. Closer.
+
+A cold hand closes on your arm. Then nothing.
+
+You wake up. Your head hurts. Someone left a candle by your hand.
+
+<<link "Light it and try again" `"A" + $act + "_start"`>><</link>>

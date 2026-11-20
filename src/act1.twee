@@ -1,0 +1,138 @@
+:: A1_start
+<<set $act to 1>><<give "coins">>
+<blockquote>Night in Florence. Rain hits the roofs like small stones. You smell wet bread and smoke. A baker pushes a warm loaf into your hands. "From the old man," he whispers. Then he runs.</blockquote>
+
+You break the bread. Inside is a paper, folded tight.
+
+The words are backwards.
+
+[[Open the paper|A1_letter]]
+
+:: A1_letter
+You know this trick. Leonardo writes like this in all his notebooks.
+
+<div class="mirror">THGINDIM TA POHSKROW YM OT EMOC</div>
+<div class="mirror">ENO ON LLET</div>
+
+One word is bigger than the others: ''THGINDIM''.
+
+When must you go? Write the word the right way round.
+
+<<textbox "_guess" "">>
+<<link "Read it">><<mirror _guess "midnight" "A1_letter_ok" "A1_letter_wrong">><</link>>
+
+:: A1_letter_wrong
+<<spend 3>>
+The letters swim in front of your eyes.
+
+Start at the right side. Read each letter to the left.
+
+[[Try again|A1_letter]]
+
+:: A1_letter_ok
+//Come to my workshop at midnight. Tell no one.//
+
+You put the paper in your shirt.
+
+Then you see him. A man in a red hat, under a dark arch.
+
+He is not looking at the rain. He is looking at you.
+
+[[Walk into the market|A1_chase]]
+
+:: A1_chase
+<<spend 2>>
+The night market is loud and full. Fish, onions, wet dogs.
+
+You look back. The red hat is still there. Ten steps behind you. Now eight.
+
+[[Hide under the fish stall|A1_hide]]
+[[Run through the crowd|A1_run]]
+
+:: A1_hide
+<<spend 1>>
+You drop under the table. The smell of fish is terrible.
+
+Boots stop next to your face. Red boots. Wet.
+
+You do not breathe.
+
+The boots walk away.
+
+[[Climb out|A1_rook]]
+
+:: A1_run
+<<spend 4>>
+You run. You push past a man with a goat.
+
+A basket falls. Apples roll everywhere. A woman shouts at you.
+
+You do not stop. When you look back, the red hat is gone.
+
+[[Keep going|A1_rook]]
+
+:: A1_rook
+A boy sits on a wall, eating one of the apples. Thin, fast eyes, a big smile.
+
+"I am Rook. You want the old man's workshop, yes? Secret road. Two coins."
+
+The long road is safe, but it is far. And the rain is getting worse.
+
+[[Pay Rook|A1_pay_rook]]
+[[Take the long road|A1_long_road]]
+
+:: A1_pay_rook
+<<take "coins">><<heart -1>><<trust "rook" 1>>
+You give him the coins. Leonardo's coins. They were not yours to spend.
+
+Rook bites one, then grins. "This way. Stay close."
+
+He takes you over roofs and through a church kitchen. In ten minutes you are there.
+
+[[Knock on the door|A1_workshop]]
+
+:: A1_long_road
+<<spend 2>><<set $flags.long_road to true>>
+"Your loss," says Rook. He is gone before you can answer.
+
+You walk for an hour. The rain finds every hole in your coat.
+
+Your boots are full of water. Your candle in your pocket is wet too.
+
+[[Knock on the door|A1_workshop]]
+
+:: A1_workshop
+Leonardo's workshop. Wooden wings hang from the ceiling like sleeping bats.
+
+Leonardo looks old tonight. Old and afraid.
+
+"There is a book, Luca. It explains how the world works. Dreams, time, love. Men want to burn it. You must find it first."
+
+He puts a small mirror in your hand.
+
+"The book does not lie. But people do. Trust the mirror, not the face."
+
+<<give "mirror">>
+
+[[Ask where the book is|A1_workshop_2]]
+
+:: A1_workshop_2
+"The Church of the Silent Bells. On the hill. Go tonight."
+
+"Why me?"
+
+"Because they watch me. Nobody watches a student." He smiles. "And you read backwards better than I do."
+
+[[Leave the workshop|A1_end]]
+
+:: A1_end [autosave]
+<<set $flags.fire_seen to true>>
+You close the door behind you. The street is quiet. Too quiet.
+
+Then you hear a scream.
+
+You turn. Orange light fills the workshop windows.
+
+The workshop is on fire.
+
+[[Run to the church|A2_start]]

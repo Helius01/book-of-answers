@@ -1,0 +1,22 @@
+:: DebugPanel [debug nobr]
+/* Dev builds only (make dev). SugarCube's own debug bar shows variables and can jump to passages. */
+<div class="debug">
+<b>Debug</b> wax $wax · heart $heart · trust E$trust.elena T$trust.tomasso R$trust.rook · mirrors $mirrorSolved
+<div>
+<<link "A1">><<goto "A1_start">><</link>>
+<<link "A2">><<set $flags.candle_lit to true>><<goto "A2_start">><</link>>
+</div>
+<div>
+Heart <<link "2">><<set $heart to 2>><<run UI.update()>><</link>>
+<<link "6">><<set $heart to 6>><<run UI.update()>><</link>>
+<<link "9">><<set $heart to 9>><<run UI.update()>><</link>>
+</div>
+<div>
+<<link "All trust 9">><<set $trust to { elena: 9, tomasso: 9, rook: 9 }>><<run UI.update()>><</link>>
+<<link "Trust 1">><<set $trust to { elena: 1, tomasso: 1, rook: 1 }>><<run UI.update()>><</link>>
+</div>
+<div>
+<<link "Wax 5">><<set $wax to 5>><<run UI.update()>><</link>>
+<<link "Wax 100">><<set $wax to 100>><<run UI.update()>><</link>>
+</div>
+</div>

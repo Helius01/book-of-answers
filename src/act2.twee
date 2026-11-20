@@ -1,0 +1,182 @@
+:: A2_start
+<<set $act to 2>>
+<blockquote>The church stands on the hill like a black tooth. The doors are chained. Crows sit on the bell tower and watch you. Nobody is here. But the snow on the steps has fresh footprints. Going in. Not coming out.</blockquote>
+
+How do you get in?
+
+[[The chained door|A2_door]]
+[[The broken window|A2_window]]
+[[The graveyard tunnel|A2_tunnel]]
+
+:: A2_door
+The chain is old. One ring is broken.
+
+You pull. The chain falls on the stone with a loud CRASH.
+
+The crows fly up, screaming. If anyone is inside, they know you are here now.
+
+<<set $flags.loud_entry to true>>
+[[Go inside|A2_inside]]
+
+:: A2_window
+You climb the wall. The stone is cold and slippery.
+
+The glass cuts your hand as you go through. Not deep. But it burns.
+
+On the floor inside, you find a small box. Flint and a steel.
+
+<<give "flint">>
+[[Look around|A2_inside]]
+
+:: A2_tunnel
+Between the graves there is a stone door, half open.
+
+The tunnel smells of earth and old water. Something runs over your foot. A rat. Only a rat.
+
+On the wall, someone has drawn the tunnels with chalk. You copy the map.
+
+<<give "tunnel_map">>
+[[Follow the tunnel up|A2_inside]]
+
+:: A2_inside
+You are inside. It is completely dark.
+
+You cannot see your own hand. Somewhere, water drips. Drip. Drip.
+
+You take out Leonardo's candle.
+
+[[Light the candle|A2_candle]]
+
+:: A2_candle
+<<set $flags.candle_lit to true>>
+<<if $flags.long_road>><<spend 5>>The wick is wet from the rain. It burns badly at first and eats wax.<<else>>The flame grows, small and gold.<</if>>
+
+The light shows a wall. Words are painted on it, very small. They were not there a second ago.
+
+<<speak "dark">>
+
+The words fade.
+
+From now on, every step costs wax. Use it well.
+
+[[Walk deeper into the church|A2_nave]]
+
+:: A2_nave
+<<spend 2>>
+Long rows of empty seats. Dust on everything. A dead pigeon on the altar.
+
+Then a voice, from the dark:
+
+"Who walks in my church with fire?"
+
+[[Answer the voice|A2_tomasso]]
+
+:: A2_tomasso
+<<spend 1>>
+An old man steps into the light. His eyes are white, like milk.
+
+"You see me? Good. Do you know I cannot see you? Does it matter?"
+
+This must be Tomasso, the bell-ringer. He speaks only in questions.
+
+"Will you answer three questions? And if you answer well, may you pass?"
+
+[[Say yes|A2_riddle1]]
+
+:: A2_riddle1
+<<spend 1>>
+"First question. What has a face, but no eyes? Hands, but no fingers?"
+
+<<textbox "_guess" "">>
+<<link "Answer">><<check _guess "clock|aclock|theclock" "A2_riddle2" "A2_riddle1_wrong">><</link>>
+
+:: A2_riddle1_wrong
+<<spend 3>>
+Tomasso taps the wall with his stick. Tick. Tock. Tick. Tock.
+
+"Do you hear the answer? Or are you deaf as well as blind?"
+
+[[Try again|A2_riddle1]]
+
+:: A2_riddle2
+<<spend 1>>
+"Good. Second question. What gets bigger the more you take away from it?"
+
+[[A hole|A2_riddle3]]
+[[A candle|A2_riddle2_wrong]]
+[[A river|A2_riddle2_wrong]]
+
+:: A2_riddle2_wrong
+<<spend 3>>
+Tomasso laughs. "Do you dig in the ground? What do you make when you dig?"
+
+[[Try again|A2_riddle2]]
+
+:: A2_riddle3
+<<spend 1>>
+"Last question. What can you break without touching it?"
+
+<<textbox "_guess" "">>
+<<link "Answer">><<check _guess "promise|apromise|yourpromise|word|yourword" "A2_question" "A2_riddle3_wrong">><</link>>
+
+:: A2_riddle3_wrong
+<<spend 3>>
+"Did you never say 'I will', and then not do it?"
+
+[[Try again|A2_riddle3]]
+
+:: A2_question
+Tomasso nods slowly.
+
+"You are clever. But are you honest? Who sent you here?"
+
+You think of the fire. Of Leonardo. Can you trust this old man?
+
+[[Tell the truth: "Leonardo sent me."|A2_truth]]
+[[Lie: "Nobody. I came alone."|A2_lie]]
+
+:: A2_truth
+<<spend 1>><<heart 1>><<trust "tomasso" 1>>
+Tomasso's face changes. He almost smiles.
+
+"Leonardo? The old fox is still alive? Then why are you standing here?"
+
+He takes your arm. His hand is warm.
+
+"Will you follow me? Do you want to see the stairs only I know?"
+
+[[Follow Tomasso|A2_end]]
+
+:: A2_lie
+<<spend 1>><<heart -1>><<trust "tomasso" -2>><<set $flags.lied_tomasso to true>>
+Tomasso is quiet for a long time.
+
+"Do you think blind men cannot hear a lie? Do you think it sounds like the truth?"
+
+He turns away. "Will you find your own way, then?"
+
+[[Follow him anyway|A2_end]]
+
+:: A2_end [autosave]
+<<spend 2>>
+You walk behind Tomasso into a cold stone hall.
+
+Then, above you, a sound.
+
+A bell rings. One time.
+
+Tomasso stops. His face goes white.
+
+"The bells have not rung in one hundred years," he whispers. "They know you are here."
+
+[[Continue|slice_end]]
+
+:: slice_end [end]
+''End of the first part.'' Thank you for playing!
+
+Please tell us:
+* Wax left: $wax
+* Heart: $heart
+* Tomasso's trust: $trust.tomasso
+* Words you did not know
+* Places where you got stuck
