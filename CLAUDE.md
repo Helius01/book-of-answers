@@ -10,7 +10,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 make build   # lint, then release build -> dist/index.html (no debug panel)
 make dev     # SugarCube test mode + debug/ -> dist/dev.html
 make watch   # same as dev, rebuilds on save
-make lint    # python3 scripts/lint.py src debug  (exit 1 on errors)
+make playtest # no debug panel, run numbers at endings -> dist/playtest.html
+make package # release zipped for itch.io -> dist/book-of-answers.zip
+make lint    # python3 scripts/lint.py src debug playtest  (exit 1 on errors)
 make test    # python3 scripts/test_lint.py  (self-check for the linter)
 ```
 
@@ -24,6 +26,7 @@ Tweego does **not** detect broken links. `scripts/lint.py` does: broken links, d
 - `src/ui.twee`: side bar (`StoryCaption`: candle bar and satchel), `StoryMenu` (Journal dialog, timers on/off), the `Journal` itself, and `BS_*` "Book Speaks" / `CL_*` clue passages.
 - `src/actN.twee`: one file per act. Passage names are prefixed `A<act>_`. Each act runs `A#_start` (sets `$act`) → missions → puzzle → big choice → `A#_end [autosave]`. Branches merge again at `A#_end`; choices survive as variables, not as separate storylines.
 - `debug/debug.twee`: `DebugPanel`, compiled only into dev builds. `StoryCaption` includes it only if `Story.has("DebugPanel")`.
+- `playtest/playtest.twee`: the end-of-run stats line, compiled only into playtest builds. Each `END_*` includes it only if `Story.has("RunStats")`.
 
 Game rules worth knowing before editing passages:
 - Change state only through the widgets: `<<spend n>>` (wax; does nothing until `$flags.candle_lit`), `<<heart n>>`, `<<trust "who" n>>`, `<<give>>`/`<<take>>` (6-item satchel), `<<speak "id">>`, `<<clue "id">>` (journal).
@@ -46,3 +49,5 @@ Phases 0–2 are done: all 7 acts, plus the 5 endings (`END_*`, tagged `[end dar
 - Secret needs `$mirrorSolved` ≥ 4 (puzzles in A1, A4, A5, A6) and all three trust scores ≥ 7.
 
 Phase 3 polish is done except the optional ambient sound (needs audio files).
+
+Phase 4 has started: `make playtest` and [docs/playtest.md](docs/playtest.md) are ready for a round with 5–10 players, `make package` builds the itch.io zip, and the word-level check is done. No playtests have run yet, so wax is still untuned.

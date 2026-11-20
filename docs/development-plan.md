@@ -4,7 +4,7 @@ Source: the "Development plan" tab of the Claude Docs doc "The Book of Answers �
 
 ## Progress
 
-Last updated 2026-11-20. Commits: `c8c5849` (Phases 0–1), `4c87c4d` (Phase 2), `82e8861` (Phase 3 polish).
+Last updated 2026-11-20. Commits: `c8c5849` (Phases 0–1), `4c87c4d` (Phase 2), `82e8861` (Phase 3 polish), `6b742ea` (Phase 4 setup).
 
 | Phase | Status |
 | --- | --- |
@@ -12,9 +12,9 @@ Last updated 2026-11-20. Commits: `c8c5849` (Phases 0–1), `4c87c4d` (Phase 2),
 | 1 — Vertical slice (Acts 1–2) | Done. The playtest gate was **skipped on purpose** |
 | 2 — Full content (Acts 3–7) | Done, including all 5 endings |
 | 3 — Endings and polish | Done, except optional ambient sound. Codex journal, heartbeat lines, timers with a setting, and parchment style are in |
-| 4 — Playtest and release | Not started |
+| 4 — Playtest and release | Started. Playtest build and guide, word-level check and itch.io package are ready. Playtests, wax tuning and the upload need a person |
 
-**How to run:** `make build` gives the release `dist/index.html`. `make dev` gives `dist/dev.html`, with a debug panel that jumps to any act and sets Heart, Trust and wax. `make lint` runs the story checker, and `make test` checks the checker.
+**How to run:** `make build` gives the release `dist/index.html`. `make dev` gives `dist/dev.html`, with a debug panel that jumps to any act and sets Heart, Trust and wax. `make playtest` gives `dist/playtest.html`: no debug panel, but the run numbers show at each ending. `make package` zips the release for itch.io. `make lint` runs the story checker, and `make test` checks the checker.
 
 ### Wax measured in scripted playthroughs
 
@@ -189,10 +189,21 @@ Show the candle as a bar that shrinks, and change the text at 50, 25 and 10 wax 
 
 ### Phase 4 — Playtest and release
 
-- [ ] Playtest rounds (see Testing)
-- [ ] Rebalance wax and score thresholds
-- [ ] English check: sentence length and word level *(sentence length enforced by lint; word level not checked)*
-- [ ] Publish the HTML build on itch.io
+- [ ] Playtest rounds (see Testing) *(kit ready: [playtest.md](playtest.md); needs 5–10 players)*
+- [ ] Rebalance wax and score thresholds *(waits for the playtest table; scripted careful play still ends near 35 wax)*
+- [x] English check: sentence length and word level *(sentence length enforced by lint; word level checked by hand — long words are common, "notebooks" and "frightened" simplified)*
+- [ ] Publish the HTML build on itch.io *(`make package` builds the zip; the upload needs the account)*
+
+**Publishing steps**
+
+1. `make package` → `dist/book-of-answers.zip`, with `index.html` at the root.
+2. On itch.io, create a project with kind **HTML**, upload the zip, and tick *This file will be played in the browser*.
+3. Set the viewport (1280×720 is a safe default), then check the phone layout before you tick *Mobile friendly*.
+4. From the command line, `butler push build <user>/<game>:html` does the same upload. Install butler first.
+
+### Phase 5 — not planned
+
+The storyline has sequel hooks (the second volume in Egypt) and bonus ideas (Leonardo's machines). They are not scheduled.
 
 ## Testing
 
@@ -211,7 +222,7 @@ Test in three layers: automatic checks on every build, a debug panel for you, an
 **Playtests**
 
 - After Phase 1: 3–5 players with intermediate English. Watch them play; note every word they ask about and every place they get stuck. *(Skipped.)*
-- After Phase 4 content: 5–10 players. Record: final wax, Heart, ending reached, time to finish, and the moment they found most exciting.
+- After Phase 4 content: 5–10 players. Record: final wax, Heart, ending reached, time to finish, and the moment they found most exciting. *([playtest.md](playtest.md) has the build, script and table.)*
 - Success targets: most players finish; nobody runs out of wax before Act 5 on a first try; at least 3 different endings reached across the group.
 
 ## Open questions
