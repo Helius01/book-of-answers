@@ -1,0 +1,189 @@
+:: A4_start
+<<set $act to 4>><<spend 6>>
+<blockquote>Stairs go down into the dark. The air is cold and tastes like old coins. Bones lie in the walls, neat as books on a shelf. Your candle makes the skulls smile.</blockquote>
+
+Behind you, on the stairs: jingle, jingle.
+
+A Silent One is coming down.
+
+There is a gap in the wall, between the bones. Just big enough for you.
+
+[[Squeeze into the gap|A4_hide]]
+
+:: A4_hide
+<<spend 1>>
+You press your back into the bones. You cover your candle with your hand.
+
+Grey robes pass the gap. A mask with no mouth.
+
+Do not move. Type //wait//.
+
+<<textbox "_guess" "">>
+<<link "Do it">><<check _guess "wait|stay|z" "A4_hide_2" "A4_caught">><</link>>
+
+:: A4_hide_2
+<<spend 1>>
+The keys stop. Right next to you.
+
+You can smell it. Wet wool and smoke.
+
+Type //wait//.
+
+<<textbox "_guess" "">>
+<<link "Do it">><<check _guess "wait|stay|z" "A4_hide_3" "A4_caught">><</link>>
+
+:: A4_hide_3
+<<spend 1>>
+The mask turns. Slowly. It looks into the gap.
+
+It looks right at you.
+
+Thump. Thump. Thump. Your heart is so loud.
+
+Type //wait//.
+
+<<textbox "_guess" "">>
+<<link "Do it">><<check _guess "wait|stay|z" "A4_hide_done" "A4_caught">><</link>>
+
+:: A4_caught
+<<spend 6>>
+You move. Only a little. But it is enough.
+
+A grey hand shoots into the gap. You bite it, hard.
+
+You run. Bones fall behind you. Your candle burns fast as you run.
+
+At last the keys are far away.
+
+[[Catch your breath|A4_bridge]]
+
+:: A4_hide_done
+<<spend 1>>
+The mask turns away. The keys go down the tunnel. Then they are gone.
+
+You breathe again.
+
+The bones make two ways forward.
+
+[[Follow the bones|A4_long]]
+<<if $satchel.includes("tunnel_map")>>[[Use your chalk map|A4_bridge]]<</if>>
+
+:: A4_long
+<<spend 4>>
+The tunnel goes on and on. Left. Right. Down again.
+
+Your candle gets shorter. At last you see water ahead.
+
+[[Go to the water|A4_bridge]]
+
+:: A4_bridge
+<<spend 1>>
+Black water. Over it, a line of flat stones. Each stone has a name and a short story.
+
+Words on the wall: //Step only on those who loved.//
+
+The first three stones:
+
+* ''Giovanni.'' He kept all his gold. He died alone with it.
+* ''Maria.'' She gave her bread to a sick child. She died hungry in winter.
+* ''Pietro.'' A great general. He won forty battles.
+
+[[Step on Giovanni|A4_fall]]
+[[Step on Maria|A4_bridge_2]]
+[[Step on Pietro|A4_fall]]
+
+:: A4_bridge_2
+<<spend 1>>
+The stone holds. Three more stones:
+
+* ''Beatrice.'' The most beautiful woman in Florence. Many men loved her.
+* ''Luca.'' He carried his old father on his back for ten years.
+* ''Antonio.'' He built the biggest house on the river.
+
+Luca. Like you.
+
+[[Step on Beatrice|A4_fall]]
+[[Step on Luca|A4_drawing]]
+[[Step on Antonio|A4_fall]]
+
+:: A4_fall
+<<spend 4>>
+The stone sinks. Ice-cold water up to your knees.
+
+Your candle almost dies. You hold it high and climb back.
+
+Think. Who loved someone? Not who //was// loved.
+
+[[Try again|A4_bridge]]
+
+:: A4_drawing
+<<spend 1>>
+On the far side, there is a drawing on the wall. Leonardo's hand. You know it.
+
+It is a map of the church. One piece is missing: the top of the tower.
+
+Under it, in mirror writing:
+
+<div class="mirror">SLAEVER EMIT</div>
+
+Write it the right way round.
+
+<<textbox "_guess" "">>
+<<link "Read it">><<mirror _guess "timereveals|time reveals" "A4_drawing_ok" "A4_drawing_wrong">><</link>>
+
+:: A4_drawing_wrong
+<<spend 3>>
+Read each word from the right. Then put them in order.
+
+[[Try again|A4_drawing]]
+[[Give up and go on|A4_rook]]
+
+:: A4_drawing_ok
+A stone in the drawing moves. Behind it, words glow:
+
+<<speak "time">>
+
+[[Go on|A4_rook]]
+
+:: A4_rook
+A face jumps out of the dark. You almost scream.
+
+It is Rook, grinning.
+
+"Five Silent Ones, behind you. I can lead them away. I know these tunnels."
+
+He points at your satchel. "But I want the old man's mirror. It is worth a lot of money."
+
+<<if $satchel.includes("mirror")>>[[Give him the mirror|A4_give]]<</if>>
+[[Say no|A4_refuse]]
+
+:: A4_give
+<<take "mirror">><<trust "rook" 2>><<set $flags.gave_mirror to true>>
+Rook takes the mirror. For a second, he looks surprised.
+
+"You trust me? Nobody trusts me."
+
+He runs back into the dark, shouting and laughing. The keys follow him.
+
+You are alone. And safe. For now.
+
+[[Go on|A4_end]]
+
+:: A4_refuse
+<<spend 6>><<trust "rook" -1>>
+"Your loss," says Rook. He is gone.
+
+The keys come closer. You run. You run until your legs burn.
+
+[[Go on|A4_end]]
+
+:: A4_end [autosave]
+A deep sound. The ceiling shakes.
+
+Behind you, the tunnel falls in. Stone and dust and bones.
+
+You can only go forward.
+
+And somewhere ahead, something is singing.
+
+[[Go toward the song|A5_start]]

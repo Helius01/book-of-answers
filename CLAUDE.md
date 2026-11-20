@@ -37,4 +37,11 @@ Writing rules for player-facing text: sentences under 12 words, common words, se
 
 ## Status
 
-Phases 0–1 are done: systems, UI, debug panel, and Acts 1–2 as the vertical slice, ending at `slice_end`. Next is the Phase 1 gate, a playtest with 3–5 intermediate English players, before writing Acts 3–7. Still to do: endings (`END_*`), and in Act 7 the darkness redirect should go to `END_ashes`.
+Phases 0–2 are done: all 7 acts, plus the 5 endings (`END_*`, tagged `[end dark]`) in `act7.twee`. The Phase 1 playtest was skipped on purpose, so nobody has played it yet. The wax budget is a first guess: an honest, careful run ends with about 50 wax, and a lying, careless run with about 5 (the doc targets about 15 for careful play). Tune it after playtests. Ending gates are in `A7_choice`:
+- Heart < 3: Ashes.
+- Heart ≥ 8 and the captive saved: Truth.
+- Heart ≥ 6: Gift.
+- Keep is always available.
+- Secret needs `$mirrorSolved` ≥ 4 (puzzles in A1, A4, A5, A6) and all three trust scores ≥ 7.
+
+Phase 3 polish (heartbeat lines, timers, parchment CSS, sound) is not started.

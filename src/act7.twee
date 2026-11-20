@@ -1,0 +1,179 @@
+:: A7_start
+<<set $act to 7>><<spend 8>>
+<blockquote>The Abbot does not attack. He sits down. He looks tired, like Leonardo. "I was there when we found it," he says. "A man read the page about death. He never spoke again. Are you sure the world is ready?"</blockquote>
+
+[[Ask him: "You found it? With who?"|A7_story]]
+
+:: A7_story
+<<spend 2>>
+"With Leonardo. Forty years ago. He was my best friend. My brother."
+
+He looks out at Florence.
+
+"He wanted to give it to everyone. I saw what it did to that man. So I hid it."
+
+"Leonardo never spoke to me again."
+
+[[Ask him: "Why not burn it, then?"|A7_why]]
+<<if $satchel.includes("mirror")>>[[Look at him in Leonardo's mirror|A7_mirror]]<</if>>
+[[Enough talk. Free your friend.|A7_rescue]]
+
+:: A7_why
+<<spend 2>>
+The Abbot is quiet. Then:
+
+"Because I read the page about love. I could not burn that."
+
+For a moment he looks very old.
+
+[[Tell him: "Leonardo misses you."|A7_forgive]]
+[[Free your friend|A7_rescue]]
+
+:: A7_mirror
+<<spend 2>><<heart 1>><<set $flags.saw_mirror to true>>
+//Trust the mirror, not the face.//
+
+You hold up the mirror. In it, the Abbot is not calm. He is crying. He is afraid.
+
+He is not evil. He is a frightened old man.
+
+[[Tell him: "Leonardo misses you."|A7_forgive]]
+[[Free your friend|A7_rescue]]
+
+:: A7_forgive
+<<spend 1>><<heart 1>><<set $flags.forgave to true>>
+You do not know if it is true. But you say it softly.
+
+The Abbot closes his eyes. "Does he?"
+
+"He sent me with a mirror. Not a knife."
+
+The old man almost smiles.
+
+[[Free your friend|A7_rescue]]
+
+:: A7_rescue
+<<spend 2>>
+$captive looks at you. The rope is tight. Below, keys on the stairs.
+
+How do you free $captive?
+
+[[Talk to the Abbot|A7_words]]
+<<if $satchel.includes("sleeping_water")>>[[Put sleeping water in his wine|A7_trick]]<</if>>
+<<if $trust.tomasso gte 7 or ($captive is "Elena" and $trust.rook gte 7)>>[[Call for help|A7_ally]]<</if>>
+
+:: A7_words
+<<spend 1>>
+<<if $heart gte 6>><<set $flags.captive_saved to true>>
+"Let $captive go," you say. "You protected the book. Now protect a person."
+
+The Abbot looks at you for a long time. Then he cuts the rope himself.
+<<else>>
+"Let $captive go," you say.
+
+"Why should I believe you?" says the Abbot. "Your eyes say one thing. Your heart says another."
+
+The rope stays tight.
+<</if>>
+
+[[Decide about the book|A7_choice]]
+
+:: A7_trick
+<<spend 1>><<take "sleeping_water">><<heart -1>><<set $flags.captive_saved to true>>
+The Abbot looks away. You put one drop in his cup.
+
+He drinks. He yawns. He sleeps.
+
+You cut the rope. $captive is free. But you feel a little dirty.
+
+[[Decide about the book|A7_choice]]
+
+:: A7_ally
+<<spend 1>><<set $flags.captive_saved to true>>
+<<if $trust.tomasso gte 7>>A stick taps on the stairs. Tomasso! "Did you think a blind man cannot climb?" He cuts the rope.<<else>>A grin in the dark. Rook! "Did you miss me?" He cuts the rope and gives you back your mirror.<<give "mirror">><</if>>
+
+$captive is free.
+
+[[Decide about the book|A7_choice]]
+
+:: A7_choice
+Keys on the stairs. Very close now. The Silent Ones are coming.
+
+You hold the book. The Abbot waits. What will you do with it?
+
+<<if $heart lt 3>>The book goes cold in your hands. Its pages turn grey.
+
+[[Continue|END_ashes]]
+<<else>>
+<<if $heart gte 8 and $flags.captive_saved>>[[Ring the bell. Give the book to everyone.|END_truth]]<</if>>
+<<if $heart gte 6>>[[Share only the safe pages|END_gift]]<</if>>
+[[Keep the book for yourself|END_abbot]]
+<<if $mirrorSolved gte 4 and $trust.elena gte 7 and $trust.tomasso gte 7 and $trust.rook gte 7>>[[Turn to the last page|END_secret]]<</if>>
+<</if>>
+
+:: END_truth [end dark]
+You open Leonardo's wings and jump.
+
+You glide over Florence at sunrise. The book is against your chest.
+
+Behind you, the bells ring for the first time in one hundred years.
+
+Then all the bells of Italy ring. The book is copied by hand in a hundred cities.
+
+At his window, Leonardo smiles.
+
+''The Bells of Truth.'' THE END.
+
+<<link "Play again">><<run Engine.restart()>><</link>>
+
+:: END_gift [end dark]
+You give the Abbot the page about death. "Hide this one," you say.
+
+You keep the page about love. You will share that one with everyone.
+
+The Abbot nods. Days later, two old men sit together in a workshop.
+
+They do not say sorry. They do not need to.
+
+''The Careful Gift.'' THE END.
+
+<<link "Play again">><<run Engine.restart()>><</link>>
+
+:: END_abbot [end dark]
+You keep the book. Only you will know its secrets.
+
+At first it is wonderful. Then, slowly, the pages go blank.
+
+You understand too late. Knowledge kept in the dark dies.
+
+Years later, you wear a grey robe. Your mask has no mouth.
+
+''The New Abbot.'' THE END.
+
+<<link "Play again">><<run Engine.restart()>><</link>>
+
+:: END_ashes [end dark]
+The light is gone. Hands take the book from you.
+
+The Abbot burns it. Slowly. Page by page.
+
+One page flies out of the window, into the morning wind.
+
+//Somewhere, a child picks up a glowing page…//
+
+''Ashes.'' THE END.
+
+<<link "Play again">><<run Engine.restart()>><</link>>
+
+:: END_secret [end dark]
+You turn to the last page of the book.
+
+There is a drawing of a young mapmaker. Fast hands. A small mirror.
+
+Under it is a name. Your name.
+
+It was written three hundred years before you were born.
+
+''The Secret Ending.'' THE END… or is it?
+
+<<link "Play again">><<run Engine.restart()>><</link>>

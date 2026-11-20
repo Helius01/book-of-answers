@@ -1,0 +1,92 @@
+:: A6_start
+<<set $act to 6>><<spend 12>>
+<blockquote>The stairs go up and up. The wood cries under your feet. Wind screams through the holes in the walls. Below you, Florence is a field of tiny lights.</blockquote>
+
+Halfway up, the stairs are broken. There is a big gap.
+
+[[Jump the gap|A6_jump]]
+[[Climb the old bell rope|A6_rope]]
+[[Climb the outside wall|A6_wall]]
+
+:: A6_jump
+<<spend 2>>
+You run and jump. Your fingers catch the edge. You pull yourself up.
+
+But your candle falls. Down, down, into the dark.
+
+<<if $satchel.includes("flint")>>You have the flint from the window. You find the candle on a beam and light it again.
+
+[[Climb on|A6_top]]
+<<else>>You climb down in the dark to find it. It takes a long time. The wax runs.
+
+<<spend 8>>[[Climb on|A6_top]]
+<</if>>
+
+:: A6_rope
+<<spend 6>>
+The rope is old but strong. You climb slowly, hand over hand.
+
+Your arms burn. The candle in your teeth drips hot wax on your chin.
+
+It takes a long time. But you are safe.
+
+[[Climb on|A6_top]]
+
+:: A6_wall
+<<spend 4>>
+Outside, the wind tries to pull you off the wall. You do not look down.
+
+Then you do look down. On the hill, grey robes. Many of them. Coming up.
+
+[[Climb on|A6_top]]
+
+:: A6_top
+<<spend 2>>
+<blockquote>Above you, the great bell waits. Black and silent, like a sleeping giant.</blockquote>
+
+Next to it is an old wooden box. On the lid is Leonardo's sign.
+
+Inside: folded wings of wood and cloth. A note: //For my student. For the way down.//
+
+<<set $flags.has_wings to true>>
+[[Go to the bell|A6_bell]]
+
+:: A6_bell
+<<spend 1>>
+There is a bird-shaped hole in the bell. Over it, one word in mirror writing:
+
+<div class="mirror">EVOL</div>
+
+Say the word as you turn the key.
+
+<<textbox "_guess" "">>
+<<link "Turn the bird key">><<mirror _guess "love" "A6_book" "A6_bell_wrong">><</link>>
+
+:: A6_bell_wrong
+<<spend 3>>
+The key will not turn. Read it from right to left. L, then O, then V, then E.
+
+[[Try again|A6_bell]]
+
+:: A6_book
+The bell opens like a flower.
+
+Inside is the book. You hold it for the first time. It is warm, like a living thing.
+
+It opens by itself to a page about love.
+
+<<if $heart gte 6>><<speak "love">><<else>>The page stays blank. The book does not trust you. Not yet.<</if>>
+
+[[Close the book|A6_end]]
+
+:: A6_end [autosave]
+<<spend 2>>
+"Beautiful, is it not?"
+
+The Grey Abbot stands at the top of the stairs. $captive is beside him, tied with rope.
+
+He smiles kindly.
+
+//"Now we talk."//
+
+[[Face him|A7_start]]

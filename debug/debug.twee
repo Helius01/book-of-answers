@@ -5,6 +5,11 @@
 <div>
 <<link "A1">><<goto "A1_start">><</link>>
 <<link "A2">><<set $flags.candle_lit to true>><<goto "A2_start">><</link>>
+<<link "A3">><<set $flags.candle_lit to true>><<goto "A3_start">><</link>>
+<<link "A4">><<set $flags.candle_lit to true>><<goto "A4_start">><</link>>
+<<link "A5">><<set $flags.candle_lit to true>><<goto "A5_start">><</link>>
+<<link "A6">><<set $flags.candle_lit to true>><<give "bird_key">><<goto "A6_start">><</link>>
+<<link "A7">><<set $flags.candle_lit to true; $captive to "Elena">><<goto "A7_start">><</link>>
 </div>
 <div>
 Heart <<link "2">><<set $heart to 2>><<run UI.update()>><</link>>

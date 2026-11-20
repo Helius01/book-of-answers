@@ -1,0 +1,99 @@
+:: A5_start
+<<set $act to 5>><<spend 10>>
+<<if $trust.tomasso gte 6>><<trust "tomasso" 1>>
+The singing is Tomasso. He stands at a door, smiling.
+
+"Did you think I would let Leonardo's boy get lost? Shall we go in?"
+<<else>>
+The song is old and sad. It comes from far away. You are alone.
+<</if>>
+
+[[Open the door|A5_library]]
+
+:: A5_library
+<<spend 2>>
+<blockquote>You enter a room and your stomach turns. The books are on the ceiling. The chairs are on the ceiling. A table hangs over your head. On it is a cup of wine. The wine does not fall.</blockquote>
+
+Then you understand. The floor is a mirror, smooth as ice.
+
+[[Look closely at the mirror floor|A5_mirror]]
+[[Leave the room|A5_page]]
+
+:: A5_mirror
+<<spend 1>>
+In the real room above you: table, cup, chair, globe.
+
+In the mirror floor: table, cup, chair, globe, ladder.
+
+What is in the mirror, but not in the room?
+
+<<textbox "_guess" "">>
+<<link "Answer">><<mirror _guess "ladder|aladder|theladder" "A5_shelf" "A5_mirror_wrong">><</link>>
+
+:: A5_mirror_wrong
+<<spend 3>>
+Look again. Name each thing in the mirror. Which one is missing above you?
+
+[[Try again|A5_mirror]]
+[[Give up|A5_page]]
+
+:: A5_shelf
+<<spend -20>><<give "sleeping_water">>
+In the mirror, the ladder stands by the far wall. You walk there and touch the wall.
+
+A hidden shelf opens. Candles! A whole box of them. You melt three into yours.
+
+Behind them is a small glass bottle. The label says: //Sleeping water. One drop.//
+
+[[Take it and go on|A5_page]]
+
+:: A5_page
+<<spend 1>>
+On a desk lies a torn page. It glows like the moon.
+
+Words come up as you watch. The page is asking you a question:
+
+//What do you want more: to be right, or to be free?//
+
+[[To be right|A5_right]]
+[[To be free|A5_free]]
+
+:: A5_right
+<<heart -1>>
+The glow gets weaker. The page seems sad.
+
+Small words come, then go: //Being right is a small, warm room. Many people die in it.//
+
+[[Turn the page over|A5_learn]]
+
+:: A5_free
+<<heart 1>>
+The page shines brighter.
+
+<<speak "free">>
+
+[[Turn the page over|A5_learn]]
+
+:: A5_learn
+<<spend 1>>
+On the back, a drawing. A tower. A bell. And inside the bell, a book.
+
+The missing piece of Leonardo's map.
+
+The book is in the Bell Tower. Inside the biggest bell.
+
+[[Go to the tower|A5_end]]
+
+:: A5_end [autosave]
+<<spend 4>><<set $captive to $trust.rook lt 4 ? "Rook" : "Elena">>
+You run for the stairs. Then a scream from above.
+
+<<if $captive is "Rook">>It is Rook. "Luca! I am sorry! I tried to sell the mirror to them!"<<else>>It is Elena. Then silence.<</if>>
+
+A calm voice fills the library. It never shouts.
+
+//"Bring me the book, Luca. Or your friend goes into the fire."//
+
+The Grey Abbot.
+
+[[Climb the tower|A6_start]]

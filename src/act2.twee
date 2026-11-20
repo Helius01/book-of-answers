@@ -133,7 +133,7 @@ Tomasso nods slowly.
 You think of the fire. Of Leonardo. Can you trust this old man?
 
 [[Tell the truth: "Leonardo sent me."|A2_truth]]
-[[Lie: "Nobody. I came alone."|A2_lie]]
+[[Lie to him: "Nobody. I came alone."|A2_lie]]
 
 :: A2_truth
 <<spend 1>><<heart 1>><<trust "tomasso" 1>>
@@ -169,14 +169,4 @@ Tomasso stops. His face goes white.
 
 "The bells have not rung in one hundred years," he whispers. "They know you are here."
 
-[[Continue|slice_end]]
-
-:: slice_end [end]
-''End of the first part.'' Thank you for playing!
-
-Please tell us:
-* Wax left: $wax
-* Heart: $heart
-* Tomasso's trust: $trust.tomasso
-* Words you did not know
-* Places where you got stuck
+[[Follow him into the dark|A3_start]]

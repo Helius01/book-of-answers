@@ -38,18 +38,18 @@ $(document).on(":passagedisplay", ev => {
 	}
 });
 
-/* Candle out: every move goes to the darkness event, except passages tagged [dark].
-   TODO Phase 3: in Act 7 send the player to END_ashes instead. */
+/* Candle out: every move goes to the darkness event (Act 7: the Ashes ending),
+   except passages tagged [dark]. */
 Config.navigation.override = dest => {
 	const v = State.variables;
 	if (v.wax > 0 || !Story.has(dest) || Story.get(dest).tags.includes("dark")) {
 		return;
 	}
-	return "darkness";
+	return v.act === 7 ? "END_ashes" : "darkness";
 };
 
 :: Widgets [widget nobr]
-/* <<spend n>>: burn wax. Does nothing until the candle is lit in Act 2. */
+/* <<spend n>>: burn wax; negative n adds wax. Does nothing until the candle is lit in Act 2. */
 <<widget "spend">>
 	<<if $flags.candle_lit>><<set $wax to Math.clamp($wax - _args[0], 0, 100)>><</if>>
 <</widget>>

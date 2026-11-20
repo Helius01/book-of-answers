@@ -1,0 +1,129 @@
+:: A3_start
+<<set $act to 3>><<spend 4>>
+<blockquote>A giant painting covers the wall. Angels with sad faces. As your candle moves, their eyes seem to move too. You come closer. You can hear something. Air. The painting is breathing.</blockquote>
+
+Your flame leans toward the painting. Wind is coming from behind it.
+
+[[Pull the edge of the painting|A3_room]]
+[[Hide and watch|A3_painting_hide]]
+
+:: A3_room
+<<spend 2>>
+The painting opens like a door. Behind it is a small room.
+
+A bed. Books. A plate with old bread.
+
+Then something cold touches your neck. A knife.
+
+"Do not move," says a woman's voice.
+
+[[Stay still|A3_elena]]
+
+:: A3_painting_hide
+<<spend 2>>
+You wait behind a stone pillar.
+
+The painting moves. A young nun steps out, a knife in her hand.
+
+She does not look at the painting. She looks straight at your candle.
+
+"Fire is easy to see in the dark, stupid," she says.
+
+[[Step out|A3_elena]]
+
+:: A3_elena
+<<spend 1>>
+She is young. Her eyes are tired and angry.
+
+"Who are you? Did the Order send you?"
+
+"My name is Luca. I am Leonardo's student."
+
+The knife comes down, slowly. "I am Sister Elena. The Order killed my brother. If you are lying, you are next."
+
+[[Ask about her brother|A3_elena_2]]
+
+:: A3_elena_2
+<<spend 1>>
+"He found the angels," she says. "He tried to open their door. They caught him the same night."
+
+She points at the painting. Under the angels there is a stone lock with four numbers.
+
+"Can you open it?"
+
+[[Look at the angels|A3_angels]]
+
+:: A3_angels
+<<spend 1>>
+There are four angels, from left to right.
+
+The first holds one candle. The second holds four doves. The third holds five stars. The last holds two keys.
+
+Under them, small words: //The year the master was born.//
+
+<<textbox "_guess" "">>
+<<link "Turn the numbers">><<check _guess "1452" "A3_lock" "A3_angels_wrong">><</link>>
+
+:: A3_angels_wrong
+<<spend 3>>
+Nothing moves. Elena watches you.
+
+"Count what each angel holds," she says. "Left to right. Four numbers."
+
+[[Try again|A3_angels]]
+
+:: A3_lock
+<<spend 1>><<give "bird_key">>
+The stone turns with a deep sound. A tiny room opens.
+
+Inside is a bronze key, shaped like a bird. You put it in your satchel.
+
+Your candle shows words on the wall:
+
+<<speak "dreams">>
+
+[[Turn to Elena|A3_choice]]
+
+:: A3_choice
+Elena holds your arm. Her hand shakes.
+
+"What is this book, Luca? Why do they kill for it?"
+
+You see her brother in her face. But can you trust her with the secret?
+
+[[Tell her the full truth|A3_truth]]
+[[Keep the secret|A3_secret]]
+
+:: A3_truth
+<<spend 1>><<heart 1>><<trust "elena" 2>>
+You tell her everything. The bread. The letter. The fire.
+
+Elena listens. When you finish, she is crying a little.
+
+"Then my brother did not die for nothing," she says.
+
+[[Continue|A3_end]]
+
+:: A3_secret
+<<trust "elena" -2>>
+"It is better if you do not know," you say.
+
+Elena's face closes like a door.
+
+"Everyone in this church has secrets," she says coldly. "I hoped you were different."
+
+[[Continue|A3_end]]
+
+:: A3_end [autosave]
+<<if $trust.elena gte 5>><<spend -20>>
+Elena gives you two thick candles. "You will need more light than me." You melt them into yours.
+<</if>>
+Then you both hear it.
+
+Footsteps. Keys. Jingle, jingle.
+
+Elena goes white. "The Silent Ones. They are in the church."
+
+She pushes you to a hole in the floor. "Go down. Go!"
+
+[[Jump into the dark|A4_start]]
