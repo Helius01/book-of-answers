@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-"The Book of Answers": a choice-based text adventure for intermediate English learners. It is written in Twee 3 for the SugarCube 2.37.3 story format, compiled with Tweego into a single HTML file, and published on itch.io. The story, characters and development plan live in a Claude Docs doc ("The Book of Answers — Text Adventure Storyline", with a "Development plan" tab), not in this repo.
+"The Book of Answers": a choice-based text adventure for intermediate English learners. It is written in Twee 3 for the SugarCube 2.37.3 story format, compiled with Tweego into a single HTML file, and published on itch.io. The story is in `docs/storyline.md`. The plan, its progress, and how the build differs from the plan are in `docs/development-plan.md`: keep its Progress section and checkboxes up to date when work lands. Both are copies of a Claude Docs doc ("The Book of Answers — Text Adventure Storyline").
 
 ## Commands
 
