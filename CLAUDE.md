@@ -27,6 +27,7 @@ Tweego does **not** detect broken links. `scripts/lint.py` does: broken links, d
 - `src/actN.twee`: one file per act. Passage names are prefixed `A<act>_`. Each act runs `A#_start` (sets `$act`) → missions → puzzle → big choice → `A#_end [autosave]`. Branches merge again at `A#_end`; choices survive as variables, not as separate storylines.
 - `debug/debug.twee`: `DebugPanel`, compiled only into dev builds. `StoryCaption` includes it only if `Story.has("DebugPanel")`.
 - `playtest/playtest.twee`: the end-of-run stats line, compiled only into playtest builds. Each `END_*` includes it only if `Story.has("RunStats")`.
+- `.github/workflows/pages.yml`: builds the release with Tweego and deploys it to GitHub Pages on every push to `master`.
 
 Game rules worth knowing before editing passages:
 - Change state only through the widgets: `<<spend n>>` (wax; does nothing until `$flags.candle_lit`), `<<heart n>>`, `<<trust "who" n>>`, `<<give>>`/`<<take>>` (6-item satchel), `<<speak "id">>`, `<<clue "id">>` (journal).

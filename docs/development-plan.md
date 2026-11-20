@@ -201,6 +201,16 @@ Show the candle as a bar that shrinks, and change the text at 50, 25 and 10 wax 
 3. Set the viewport (1280×720 is a safe default), then check the phone layout before you tick *Mobile friendly*.
 4. From the command line, `butler push build <user>/<game>:html` does the same upload. Install butler first.
 
+**Free test URL (GitHub Pages)**
+
+`.github/workflows/pages.yml` builds the release on every push to `master` and publishes it. Nothing to install on the runner: the workflow downloads Tweego.
+
+1. Push the repo to GitHub. Pages on a public repo is free; a private repo needs a paid plan.
+2. Repo → Settings → Pages → Source: **GitHub Actions**.
+3. Push to `master`, or run the workflow from the Actions tab. The game is then at `https://<user>.github.io/<repo>/`.
+
+Vercel can host it too, but it needs the same Tweego download in a build command. One deploy path is enough. Saves live in the browser per site, so a player's run on the Pages URL does not share saves with `localhost` or itch.io.
+
 ### Phase 5 — not planned
 
 The storyline has sequel hooks (the second volume in Egypt) and bonus ideas (Leonardo's machines). They are not scheduled.

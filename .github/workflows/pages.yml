@@ -1,0 +1,44 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Tweego 2.1.1
+        run: |
+          curl -sSL -o "$RUNNER_TEMP/tweego.zip" \
+            https://github.com/tmedwards/tweego/releases/download/v2.1.1/tweego-2.1.1-linux-x64.zip
+          unzip -q "$RUNNER_TEMP/tweego.zip" -d "$RUNNER_TEMP/tweego"
+          mkdir -p "$HOME/.local/bin"
+          find "$RUNNER_TEMP/tweego" -name tweego -type f -exec install -m755 {} "$HOME/.local/bin/tweego" \;
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - run: make build
+
+      - run: mkdir -p _site && cp dist/index.html _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
