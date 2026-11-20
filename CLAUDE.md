@@ -20,13 +20,14 @@ Tweego does **not** detect broken links. `scripts/lint.py` does: broken links, d
 
 ## Architecture
 
-- `src/systems.twee`: `StoryData` (IFID and title are frozen, because the save key comes from them), `StoryInit` (all 9 state variables), `StoryScript`, widgets, and the `darkness` passage.
-- `src/ui.twee`: side bar (`StoryCaption`: candle bar and satchel), `StoryMenu` Journal dialog, and `BS_*` "Book Speaks" answer passages tagged `[answer]`.
+- `src/systems.twee`: `StoryData` (IFID and title are frozen, because the save key comes from them), `StoryInit` (all 10 state variables), `StoryScript`, widgets, and the `darkness` passage.
+- `src/ui.twee`: side bar (`StoryCaption`: candle bar and satchel), `StoryMenu` (Journal dialog, timers on/off), the `Journal` itself, and `BS_*` "Book Speaks" / `CL_*` clue passages.
 - `src/actN.twee`: one file per act. Passage names are prefixed `A<act>_`. Each act runs `A#_start` (sets `$act`) → missions → puzzle → big choice → `A#_end [autosave]`. Branches merge again at `A#_end`; choices survive as variables, not as separate storylines.
 - `debug/debug.twee`: `DebugPanel`, compiled only into dev builds. `StoryCaption` includes it only if `Story.has("DebugPanel")`.
 
 Game rules worth knowing before editing passages:
-- Change state only through the widgets: `<<spend n>>` (wax; does nothing until `$flags.candle_lit`), `<<heart n>>`, `<<trust "who" n>>`, `<<give>>`/`<<take>>` (6-item satchel), `<<speak "id">>`.
+- Change state only through the widgets: `<<spend n>>` (wax; does nothing until `$flags.candle_lit`), `<<heart n>>`, `<<trust "who" n>>`, `<<give>>`/`<<take>>` (6-item satchel), `<<speak "id">>`, `<<clue "id">>` (journal).
+- Timers: `<<hurry "tooSlowPassage">>` gives 10 seconds. It does nothing while `$flags.timers` is false (menu toggle).
 - Typed puzzles: `<<textbox "_guess" "">>` plus a `<<link>>` that calls `<<check _guess "ans|alt" "okPassage" "failPassage">>` or `<<mirror ...>>` (`<<mirror>>` also counts `$mirrorSolved` once per puzzle). The **fail passage** spends the 3 wax.
 - `Config.history.maxStates = 1`: there is no undo by design.
 - `Config.navigation.override` sends every move to `darkness` when wax is 0, unless the target is tagged `[dark]`.
@@ -44,4 +45,4 @@ Phases 0–2 are done: all 7 acts, plus the 5 endings (`END_*`, tagged `[end dar
 - Keep is always available.
 - Secret needs `$mirrorSolved` ≥ 4 (puzzles in A1, A4, A5, A6) and all three trust scores ≥ 7.
 
-Phase 3 polish (heartbeat lines, timers, parchment CSS, sound) is not started.
+Phase 3 polish is done except the optional ambient sound (needs audio files).

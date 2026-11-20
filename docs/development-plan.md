@@ -4,14 +4,14 @@ Source: the "Development plan" tab of the Claude Docs doc "The Book of Answers �
 
 ## Progress
 
-Last updated 2026-11-20. Commits: `c8c5849` (Phases 0–1), `4c87c4d` (Phase 2).
+Last updated 2026-11-20. Commits: `c8c5849` (Phases 0–1), `4c87c4d` (Phase 2), `82e8861` (Phase 3 polish).
 
 | Phase | Status |
 | --- | --- |
 | 0 — Setup | Done |
 | 1 — Vertical slice (Acts 1–2) | Done. The playtest gate was **skipped on purpose** |
 | 2 — Full content (Acts 3–7) | Done, including all 5 endings |
-| 3 — Endings and polish | Endings and Journal done. Heartbeat lines, timers, parchment style and sound not started |
+| 3 — Endings and polish | Done, except optional ambient sound. Codex journal, heartbeat lines, timers with a setting, and parchment style are in |
 | 4 — Playtest and release | Not started |
 
 **How to run:** `make build` gives the release `dist/index.html`. `make dev` gives `dist/dev.html`, with a debug panel that jumps to any act and sets Heart, Trust and wax. `make lint` runs the story checker, and `make test` checks the checker.
@@ -88,7 +88,7 @@ Each phase ends at a gate. Do not start the next phase until the gate passes, es
 
 ## Game state
 
-The whole game runs on 9 variables. Define them once in `StoryInit` and change them only through small helper widgets, so the rules stay in one place.
+The whole game runs on 10 variables. Define them once in `StoryInit` and change them only through small helper widgets, so the rules stay in one place.
 
 | Variable | Type / range | Start | Changed by | Read by |
 | --- | --- | --- | --- | --- |
@@ -98,6 +98,7 @@ The whole game runs on 9 variables. Define them once in `StoryInit` and change t
 | `$satchel` | array of item ids, max 6 | `[]` | Pick up / drop scenes | Puzzle passages, Act 6 escape |
 | `$mirrorSolved` | number, 0–N | 0 | Each solved mirror puzzle | Secret ending |
 | `$answers` | array of answer ids | `[]` | "The Book Speaks" moments | Codex journal |
+| `$clues` | array of clue ids | `[]` | `<<clue>>` at each discovery | Codex journal |
 | `$act` | number, 1–7 | 1 | Act hub passages | Save slot names, journal |
 | `$captive` | string | `""` | End of Act 5 (Elena or Rook) | Acts 6–7 text |
 | `$flags` | object of true/false | `{}` | One-off events (`fire_seen`, `lied_tomasso`…) | Small text changes |
@@ -120,7 +121,7 @@ Use a **branch-and-merge** structure: choices split the path inside an act, but 
 4. One big choice that changes a score.
 5. `A#_end` — the cliffhanger, auto-save, link to the next act.
 
-**Reusable widgets** to write once in `systems.twee`: `<<spend n>>` (wax), `<<heart n>>`, `<<trust who n>>`, `<<give item>>` / `<<take item>>` (with the 6-item limit), `<<mirror answer>>` (checks a reversed word, ignores case and spaces), `<<speak id>>` (unlocks a "Book Speaks" answer).
+**Reusable widgets** to write once in `systems.twee`: `<<spend n>>` (wax), `<<heart n>>`, `<<trust who n>>`, `<<give item>>` / `<<take item>>` (with the 6-item limit), `<<mirror answer>>` (checks a reversed word, ignores case and spaces), `<<speak id>>` (unlocks a "Book Speaks" answer), `<<clue id>>` (adds a page to the journal), and `<<hurry passage>>` (ten seconds to choose, if timers are on).
 
 **Text style in code:** keep each passage under ~120 words. Long scenes split into short passages with a single "Continue" link, so the player reads one screen at a time.
 
@@ -181,10 +182,10 @@ Show the candle as a bar that shrinks, and change the text at 50, 25 and 10 wax 
 ### Phase 3 — Endings and polish
 
 - [x] Write all 5 endings and test the conditions for each *(each one reached in a scripted run)*
-- [ ] Codex journal page (clues, maps, "Book Speaks" answers) *(Journal shows Book Speaks answers only; no clues or maps yet)*
-- [ ] Heartbeat lines and optional 10-second timers (with a setting to turn timers off) *(one heartbeat line in A4_hide_3)*
-- [ ] Style: parchment look, candle-flicker effect, readable font size *(readable font only)*
-- [ ] Optional: ambient sound (rain, bells, keys)
+- [x] Codex journal page (clues, maps, "Book Speaks" answers) *(Journal shows both: `$clues`, with the tunnel map as text, and the answers)*
+- [x] Heartbeat lines and optional 10-second timers (with a setting to turn timers off) *(Act 1 chase; "Timers: on/off" in the story menu)*
+- [x] Style: parchment look, candle-flicker effect, readable font size *(serif, parchment page, flicker; animation off under reduced motion)*
+- [ ] Optional: ambient sound (rain, bells, keys) *(not started: needs audio files)*
 
 ### Phase 4 — Playtest and release
 
