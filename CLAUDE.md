@@ -51,4 +51,4 @@ Phases 0–2 are done: all 7 acts, plus the 5 endings (`END_*`, tagged `[end dar
 
 Phase 3 polish is done except the optional ambient sound (needs audio files).
 
-Phase 4 has started: `make playtest` and [docs/playtest.md](docs/playtest.md) are ready for a round with 5–10 players, `make package` builds the itch.io zip, and the word-level check is done. No playtests have run yet, so wax is still untuned.
+Phase 4 has started: `make playtest` and [docs/playtest.md](docs/playtest.md) are ready for a round with 5–10 players, `make package` builds the itch.io zip, and the word-level check is done. No playtests have run yet, so wax is still untuned. The GitHub Pages test build is live at <https://helius01.github.io/book-of-answers/> (repo `Helius01/book-of-answers`, deploys `master`).

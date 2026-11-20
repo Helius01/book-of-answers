@@ -16,6 +16,8 @@ Last updated 2026-11-20. Commits: `c8c5849` (Phases 0–1), `4c87c4d` (Phase 2),
 
 **How to run:** `make build` gives the release `dist/index.html`. `make dev` gives `dist/dev.html`, with a debug panel that jumps to any act and sets Heart, Trust and wax. `make playtest` gives `dist/playtest.html`: no debug panel, but the run numbers show at each ending. `make package` zips the release for itch.io. `make lint` runs the story checker, and `make test` checks the checker.
 
+**Live build:** <https://helius01.github.io/book-of-answers/> — GitHub Pages builds `master` on every push.
+
 ### Wax measured in scripted playthroughs
 
 | Run | Wax at end of each act (A2 → A6) | Wax at final choice | Outcome |
@@ -192,7 +194,7 @@ Show the candle as a bar that shrinks, and change the text at 50, 25 and 10 wax 
 - [ ] Playtest rounds (see Testing) *(kit ready: [playtest.md](playtest.md); needs 5–10 players)*
 - [ ] Rebalance wax and score thresholds *(waits for the playtest table; scripted careful play still ends near 35 wax)*
 - [x] English check: sentence length and word level *(sentence length enforced by lint; word level checked by hand — long words are common, "notebooks" and "frightened" simplified)*
-- [ ] Publish the HTML build on itch.io *(`make package` builds the zip; the upload needs the account)*
+- [ ] Publish the HTML build on itch.io *(Pages test build is live; `make package` builds the itch zip, the upload needs the account)*
 
 **Publishing steps**
 
@@ -205,9 +207,13 @@ Show the candle as a bar that shrinks, and change the text at 50, 25 and 10 wax 
 
 `.github/workflows/pages.yml` builds the release on every push to `master` and publishes it. Nothing to install on the runner: the workflow downloads Tweego.
 
+This is already set up for the repo [Helius01/book-of-answers](https://github.com/Helius01/book-of-answers): <https://helius01.github.io/book-of-answers/>.
+
 1. Push the repo to GitHub. Pages on a public repo is free; a private repo needs a paid plan.
 2. Repo → Settings → Pages → Source: **GitHub Actions**.
-3. Push to `master`, or run the workflow from the Actions tab. The game is then at `https://<user>.github.io/<repo>/`.
+3. Push to `master`, or run the workflow from the Actions tab.
+
+If you rename the branch, add the new name to the `github-pages` environment (Settings → Environments → github-pages → deployment branches). The environment only allows branches on that list, and a blocked branch fails the job before its first step.
 
 Vercel can host it too, but it needs the same Tweego download in a build command. One deploy path is enough. Saves live in the browser per site, so a player's run on the Pages URL does not share saves with `localhost` or itch.io.
 
