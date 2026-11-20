@@ -1,13 +1,15 @@
-/* Parchment page on dark church stone. Readable first. */
+/* Parchment page on dark church stone. Readable first.
+   Text colour is scoped: the side bar and dialogs stay light on dark. */
 body {
 	font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
 	font-size: 1.25em;
-	color: #2b1b0e;
+	color: #eee;
 	background-color: #17130f;
 	background-image: radial-gradient(circle at 50% 0%, #3a2f24 0%, #17130f 65%);
 	background-attachment: fixed;
 }
 #passages {
+	color: #2b1b0e;
 	line-height: 1.6;
 	max-width: 38em;
 	margin: 1.5em auto 2em;
@@ -16,15 +18,27 @@ body {
 	background-color: #f2e3c2;
 	background-image:
 		radial-gradient(circle at 15% 10%, rgba(255, 252, 240, 0.9), transparent 55%),
-		radial-gradient(circle at 85% 90%, rgba(196, 154, 96, 0.35), transparent 60%);
+		radial-gradient(circle at 85% 90%, rgba(196, 154, 96, 0.25), transparent 60%);
 	box-shadow: 0 0 0 1px #c8ab7c, 0 1em 3em rgba(0, 0, 0, 0.65);
 }
 #passages a.link-internal,
 #passages a.link-broken {
-	color: #8a4b00;
+	color: #7a4000;
 }
-#passages a.link-internal:hover {
-	color: #b05e00;
+#passages a.link-internal:hover,
+#passages a.link-internal:focus {
+	color: #5c3000;
+	text-decoration: underline;
+}
+#passages a:focus-visible {
+	outline: 2px solid #5c3000;
+	outline-offset: 3px;
+}
+#passages input[type="text"],
+#passages textarea {
+	color: #2b1b0e;
+	background-color: #fffdf6;
+	border: 1px solid #8a6d3b;
 }
 blockquote {
 	font-style: italic;
@@ -38,7 +52,7 @@ blockquote {
 	font-size: 1.2em;
 }
 .note {
-	color: #a0522d;
+	color: #8a3c1e;
 }
 .speaks {
 	border: 1px solid #b8860b;
@@ -58,12 +72,6 @@ blockquote {
 	overflow-x: auto;
 }
 
-/* The journal opens as a dialog. */
-#ui-dialog-body {
-	color: #2b1b0e;
-	background-color: #f2e3c2;
-}
-
 /* Candle bar in the side bar, with a slow flicker. */
 .candle {
 	height: 0.8em;
@@ -80,7 +88,7 @@ blockquote {
 	background: #e08a2e;
 }
 .candle.low .wax {
-	background: #c0392b;
+	background: #e05a4a;
 }
 .candle-text {
 	font-size: 0.85em;
@@ -96,13 +104,13 @@ blockquote {
 	font-style: italic;
 	letter-spacing: 0.2em;
 	margin: 1.5em 0;
-	opacity: 0.7;
+	opacity: 0.8;
 }
 
 /* Ten-second timer bar (see <<hurry>>). */
 .timer {
 	font-size: 0.85em;
-	color: #a0522d;
+	color: #8a3c1e;
 	margin: 0.75em 0;
 }
 .timer div {
@@ -132,9 +140,9 @@ blockquote {
 	72% { opacity: 1; }
 }
 @keyframes thump {
-	0%, 100% { opacity: 0.5; }
+	0%, 100% { opacity: 0.7; }
 	15% { opacity: 1; }
-	30% { opacity: 0.6; }
+	30% { opacity: 0.75; }
 }
 @keyframes burn {
 	from { transform: scaleX(1); }
